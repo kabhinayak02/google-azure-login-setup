@@ -31,7 +31,7 @@ const googleAuth = async (req, res) => {
         const token = jwt.sign({ _id, email },
             process.env.JWT_SECRET,
             {
-                expiresIn: process.env.JWT_SECRET
+                expiresIn: process.env.JWT_TIMEOUT
             }
         );
 

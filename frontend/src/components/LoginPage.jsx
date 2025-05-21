@@ -15,7 +15,7 @@ const LoginPage = () => {
 
   const handleMicrosoftLogin = () => {
     const clientId = import.meta.env.VITE_MS_CLIENT_ID;
-    const redirectUri = "http://localhost:3000/oauth/microsoft";
+    const redirectUri = "http://localhost:5173/oauth/microsoft";
     const scope = "User.Read";
     const authUrl = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&response_mode=query&scope=${scope}&state=ms`;
     window.location.href = authUrl;

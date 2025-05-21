@@ -31,31 +31,31 @@ const Dashboard = () => {
     // </div>
 
     <div className="w-screen flex flex-col items-center">
-  <h1 className="text-2xl font-semibold mt-4">Welcome {userInfo?.name}</h1>
-  <h3 className="text-lg mt-1">Email: {userInfo?.email}</h3>
+      <h1 className="text-2xl font-semibold mt-4">Welcome {userInfo?.name}</h1>
+      <h3 className="text-lg mt-1">Email: {userInfo?.email}</h3>
 
-  {/* JWT Token Block */}
-  <div className="w-full max-w-md bg-gray-800 text-white p-4 rounded-md mt-4 break-all">
-    <p className="mb-0">
-      <span className="font-semibold">Our JWTre Token:</span>
-      <br />
-      <span>{userInfo?.token}</span>
-    </p>
-  </div>
+      {/* JWT Token Block */}
+      <div className="w-full max-w-md bg-gray-800 text-white p-4 rounded-md mt-4 break-all">
+        <p className="mb-0">
+          <span className="font-semibold">Our JWT Token:</span>
+          <br />
+          <span>{userInfo?.token}</span>
+        </p>
+      </div>
 
-  <img
-    src={userInfo?.imageUrl}
-    alt={userInfo?.email}
-    className="mt-4 w-24 h-24 rounded-full object-cover"
-  />
+      <img
+        src={userInfo?.imageUrl}
+        alt={userInfo?.email}
+        className="mt-4 w-24 h-24 rounded-full object-cover"
+      />
 
-  <button
-    onClick={handleLogout}
-    className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
-  >
-    Logout
-  </button>
-</div>
+      <button
+        onClick={handleLogout}
+        className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+      >
+        Logout
+      </button>
+    </div>
 
 
 
