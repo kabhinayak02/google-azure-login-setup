@@ -9,7 +9,7 @@ const MicrosoftCallback = () => {
     console.log("code++++++ ", code);
 
     if (code) {
-      fetch(`http://localhost:8080/auth/microsoft?code=${code}`)
+      fetch(`http://localhost:8080/auth/microsoft/callback?code=${code}`)
         .then(res => res.json())
         .then(data => {
           localStorage.setItem("user-info", JSON.stringify({ ...data.user, token: data.token }));

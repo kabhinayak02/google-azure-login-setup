@@ -13,12 +13,14 @@ const LoginPage = () => {
     }
   };
 
-  const handleMicrosoftLogin = () => {
-    const clientId = import.meta.env.VITE_MS_CLIENT_ID;
-    const redirectUri = "http://localhost:5173/oauth/microsoft";
-    const scope = "User.Read";
-    const authUrl = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&response_mode=query&scope=${scope}&state=ms`;
-    window.location.href = authUrl;
+  const handleMicrosoftLogin = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/auth/microsoft/url");
+      const data = await res.json();
+      window.location.href = data.url;
+    } catch (err) {
+      console.error("Failed to get Microsoft login URL", err);
+    }
   };
 
   const googleLogin = useGoogleLogin({
