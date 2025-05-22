@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const handleGoogleSuccess = async (authResult) => {
-    if (authResult.code) {
-      const res = await fetch(`http://localhost:8080/auth/google?code=${authResult.code}`);
-      const data = await res.json();
-      localStorage.setItem('user-info', JSON.stringify({ ...data.user, token: data.token }));
-      navigate('/dashboard');
-    }
-  };
+  // const handleGoogleSuccess = async (authResult) => {
+  //   if (authResult.code) {
+  //     const res = await fetch(`http://localhost:8080/auth/google?code=${authResult.code}`);
+  //     const data = await res.json();
+  //     localStorage.setItem('user-info', JSON.stringify({ ...data.user, token: data.token }));
+  //     navigate('/dashboard');
+  //   }
+  // };
 
   const handleMicrosoftLogin = async () => {
     try {
@@ -23,10 +23,20 @@ const LoginPage = () => {
     }
   };
 
+  // const googleLogin = useGoogleLogin({
+  //   onSuccess: handleGoogleSuccess,
+  //   onError: (err) => console.error("Google Error", err),
+  //   flow: "auth-code",
+  // });
+
   const googleLogin = useGoogleLogin({
-    onSuccess: handleGoogleSuccess,
-    onError: (err) => console.error("Google Error", err),
     flow: "auth-code",
+    onSuccess: async ({ code }) => {
+      const res = await fetch(`http://localhost:8080/auth/google?code=${code}`);
+      const data = await res.json();
+      localStorage.setItem("user-info", JSON.stringify({ ...data.user, token: data.token }));
+      navigate("/dashboard");
+    },
   });
 
   return (
