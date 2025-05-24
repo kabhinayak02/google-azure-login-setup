@@ -6,11 +6,10 @@ import MicrosoftCallback from './components/MicrosoftCallback'; // MS OAuth call
 import Dashboard from './components/Dashboard';
 import PageNotFound from './components/PageNotFound';
 import RefreshHandler from './components/RefreshHandler';
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import GoogleCallback from './components/GoogleCallback'; // Google OAuth callback handler
 
 function App() {
   const [isAuthenticated, setIsAutheticated] = useState(false);
-  const clientId = import.meta.env.VITE_CLIENT_ID;
   const PrivateRoute = ({ element }) => {
     return isAuthenticated ? element : <Navigate to='/login' />;
   };
@@ -18,15 +17,14 @@ function App() {
   return (
     <BrowserRouter>
       <RefreshHandler setIsAutheticated={setIsAutheticated} />
-      <GoogleOAuthProvider clientId={clientId}>
         <Routes>
           <Route path="/login" element={<LoginPage />} />                  {/* Combined login */}
           <Route path="/oauth/microsoft" element={<MicrosoftCallback />} /> {/* MS redirect */}
+          <Route path="/oauth/google" element={<GoogleCallback />} /> {/* Google redirect */}
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
-      </GoogleOAuthProvider>
     </BrowserRouter>
   );
 }
